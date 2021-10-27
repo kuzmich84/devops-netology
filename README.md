@@ -1,2 +1,2 @@
 # devops-netology
-netology course
+Netology course DevOps 2021
