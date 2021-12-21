@@ -99,21 +99,28 @@ import os
 
 if len(sys.argv) > 1:
     path = sys.argv[1]
-    bash_command = ["cd ~" + path, "git status"]
-    result_os = os.popen(' && '.join(bash_command)).read()
-    for result in result_os.split('\n'):
-        if result.find('modified') != -1:
-            prepare_result = result.replace('\tmodified:   ', '')
-            print(path + prepare_result)
 else:
-    print('Введите путь к репозиторию через параметр')
+    path = os.getcwd()
+
+bash_command = ["cd " + path, "git status"]
+result_os = os.popen(' && '.join(bash_command)).read()
+for result in result_os.split('\n'):
+    if result.find('modified') != -1:
+        prepare_result = result.replace('\tmodified:   ', '')
+        print(path + prepare_result)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-mitry@dmitry-N56VZ:~/PycharmProjects/Netology/devops-netology/04-script-02-py$ ./task3.py /netology/sysadm-homeworks/
-/netology/sysadm-homeworks/README.md
-/netology/sysadm-homeworks/test/file1
+dmitry@dmitry-N56VZ:~/PycharmProjects/devops-netology/04-script-02-py$ ./task3.py ~/netology/sysadm-homeworks
+/home/dmitry/netology/sysadm-homeworksREADME.md
+/home/dmitry/netology/sysadm-homeworkstest/file1
+
+
+mitry@dmitry-N56VZ:~/netology/sysadm-homeworks$ ./task3.py 
+/home/dmitry/netology/sysadm-homeworksREADME.md
+/home/dmitry/netology/sysadm-homeworkstest/file1
+
 
 ```
 
